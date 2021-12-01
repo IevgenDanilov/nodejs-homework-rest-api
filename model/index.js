@@ -1,7 +1,5 @@
 const fs = require("fs/promises");
 const { number } = require("joi");
-// const { v4 } = require("uuid");
-// const contacts = require("./contacts.json");
 const filePath = require("./contactsPath");
 
 const listContacts = async () => {

@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const joiSchema = Joi.object({
+const contactSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
   phone: Joi.string()
     .min(5)
@@ -11,4 +11,4 @@ const joiSchema = Joi.object({
   email: Joi.string().email({ minDomainSegments: 2 }).required(),
 });
 
-module.exports = joiSchema;
+module.exports = contactSchema;
