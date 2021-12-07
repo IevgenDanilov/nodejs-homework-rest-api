@@ -4,6 +4,7 @@ const cors = require("cors");
 const contactsRouter = require("./routes/api/contacts");
 
 const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 // const dotenv = require("dotenv");
 // dotenv.config();
 
@@ -12,13 +13,44 @@ require("dotenv").config();
 const { DB_HOST } = process.env;
 console.log(DB_HOST);
 
+const contactSchema = Schema({
+  name: {
+    type: String,
+    required: [true, "Set name for contact"],
+  },
+  email: {
+    type: String,
+  },
+  phone: {
+    type: String,
+  },
+  favorite: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const Contact = model("contact", contactSchema);
+
+const newContact = {
+  name: "Yevhen Danilov",
+  email: "evgdan@gmail.com",
+  phone: "(066) 666-6666",
+  favorite: true,
+};
+
 mongoose
   .connect(DB_HOST, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((result) => {
-    console.log("Database connection successful");
+  .then(async () => {
+    try {
+      const result = await Contact.create(newContact);
+      console.log(result);
+    } catch (error) {
+      console.log(error.message);
+    }
   })
   .catch((error) => {
     console.log(error.message);
