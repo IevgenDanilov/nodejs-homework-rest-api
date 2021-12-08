@@ -2,6 +2,7 @@ const express = require("express");
 
 const { ctrlWrapper, validation } = require("../../middlewares");
 const { joiSchema } = require("../../models/contact");
+const { joiUpdStatusSchema } = require("../../models/contact");
 const { contacts: ctrl } = require("../../controllers");
 
 const router = express.Router();
@@ -20,7 +21,7 @@ router.put(
 
 router.patch(
   "/:contactId/favorite",
-  validation(joiSchema),
+  validation(joiUpdStatusSchema),
   ctrlWrapper(ctrl.updateStatusContact)
 );
 

@@ -1,9 +1,10 @@
 const { NotFound, BadRequest } = require("http-errors");
 // const createError = require("http-errors");
 const { Contact } = require("../models");
+const { ContactUpdStatus } = require("../models");
 
 const listContacts = async (req, res, next) => {
-  const result = await Contact.find({}, "_id name email phone favorite");
+  const result = await Contact.find({}, "name email phone favorite");
   res.json({
     status: "success",
     code: 200,
@@ -44,7 +45,7 @@ const addContact = async (req, res, next) => {
 
 const updateContact = async (req, res, next) => {
   const { contactId } = req.params;
-  const result = await Contact.findByIdAndUpdate(contactId, req.body, {
+  const result = await ContactUpdStatus.findByIdAndUpdate(contactId, req.body, {
     new: true,
   });
   if (!result) {

@@ -8,7 +8,6 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const { DB_HOST } = process.env;
-console.log(DB_HOST);
 
 const app = express();
 
