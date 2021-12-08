@@ -2,7 +2,6 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
 const codeRegexp = /^(?:\d{3}|\(\d{3}\))([-\/\ ])\d{3}([-\/\ ])\d{4}$/;
-// const codeRegexp = /^[0-9]{9}$/;
 
 const contactSchema = Schema(
   {
