@@ -6,18 +6,24 @@ const { contacts: ctrl } = require("../../controllers");
 
 const router = express.Router();
 
-// router.get("/", ctrlWrapper(ctrl.listContacts));
+router.get("/", ctrlWrapper(ctrl.listContacts));
 
-// router.get("/:contactId", ctrlWrapper(ctrl.getContactById));
+router.get("/:contactId", ctrlWrapper(ctrl.getContactById));
 
 router.post("/", validation(joiSchema), ctrlWrapper(ctrl.addContact));
 
-// router.put(
-//   "/:contactId",
-//   validation(joiSchema),
-//   ctrlWrapper(ctrl.updateContact)
-// );
+router.put(
+  "/:contactId",
+  validation(joiSchema),
+  ctrlWrapper(ctrl.updateContact)
+);
 
-// router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
+router.patch(
+  "/:contactId/favorite",
+  validation(joiSchema),
+  ctrlWrapper(ctrl.updateStatusContact)
+);
+
+router.delete("/:contactId", ctrlWrapper(ctrl.removeContact));
 
 module.exports = router;
