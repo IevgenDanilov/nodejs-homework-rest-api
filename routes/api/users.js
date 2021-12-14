@@ -10,7 +10,7 @@ const router = express.Router();
 router.post("/signup", validation(joiSchema), ctrlWrapper(ctrl.signup));
 // router.post("/signup", ctrl.signup);
 
-router.post("/login", ctrlWrapper(ctrl.login));
+router.post("/login", validation(joiSchema), ctrlWrapper(ctrl.login));
 // router.post("/signin", ctrl.signin);
 
 router.get("/logout", ctrlWrapper(ctrl.logout));
