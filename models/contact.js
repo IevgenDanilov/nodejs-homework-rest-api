@@ -50,6 +50,9 @@ const contactUpdStatusSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
+try {
+} catch (error) {}
+
 const joiSchema = Joi.object({
   name: Joi.string().min(2).required(),
   email: Joi.string().email({ minDomainSegments: 2 }).required(),

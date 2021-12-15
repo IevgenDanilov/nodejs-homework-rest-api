@@ -10,7 +10,7 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user || !user.comparePassword(password)) {
-    throw new Unauthorized(`Wrong email or password`);
+    throw new Unauthorized(`Email or password is wrong`);
   }
   // if(!user){
   //     throw new Unauthorized(`Email ${email} not found`);
@@ -35,6 +35,7 @@ const login = async (req, res) => {
     code: 200,
     data: {
       token,
+      user,
     },
   });
 };
