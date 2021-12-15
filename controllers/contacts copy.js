@@ -4,8 +4,8 @@ const { Contact } = require("../models");
 const { ContactUpdStatus } = require("../models");
 
 const listContacts = async (req, res, next) => {
-  // const { contactId } = req.user;
-  const result = await Contact.find({}).populate(
+  const { _id } = req.user;
+  const result = await Contact.find({ owner: _id }).populate(
     "owner",
     "name",
     "email",

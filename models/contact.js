@@ -58,7 +58,7 @@ const joiSchema = Joi.object({
   email: Joi.string().email({ minDomainSegments: 2 }).required(),
   phone: Joi.string().min(5).max(20).pattern(codeRegexp).required(),
   favorite: Joi.boolean(),
-  owner: Joi.string().required(),
+  // owner: Joi.string().required(),
 });
 
 const joiUpdStatusSchema = Joi.object({
@@ -66,7 +66,7 @@ const joiUpdStatusSchema = Joi.object({
   email: Joi.string().email({ minDomainSegments: 2 }),
   phone: Joi.string().min(5).max(20).pattern(codeRegexp),
   favorite: Joi.boolean(),
-  owner: Joi.string(),
+  // owner: Joi.string(),
 });
 
 const Contact = model("contact", contactSchema);

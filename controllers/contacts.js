@@ -1,10 +1,18 @@
 const { NotFound, BadRequest } = require("http-errors");
 // const createError = require("http-errors");
-const { Contact } = require("../models");
+const { Contact, User } = require("../models");
 const { ContactUpdStatus } = require("../models");
 
 const listContacts = async (req, res, next) => {
-  const result = await Contact.find({}, "name email phone favorite");
+  const { _id } = req.user;
+  const result = await Contact.find({ owner: _id }).populate(
+    "owner",
+    "name"
+    // "email",
+    // "phone",
+    // "favorite"
+  );
+  // const result = await Contact.find({}, "name email phone favorite");
   res.json({
     status: "success",
     code: 200,
@@ -18,7 +26,7 @@ const getContactById = async (req, res, next) => {
   const { contactId } = req.params;
   const contact = await Contact.findById(
     contactId,
-    "_id name email phone favorite"
+    "name email phone favorite"
   );
   if (!contact) {
     throw new NotFound(`Contact with id=${contactId} not found`);
@@ -32,7 +40,8 @@ const getContactById = async (req, res, next) => {
 };
 
 const addContact = async (req, res, next) => {
-  const result = await Contact.create(req.body);
+  const newContact = { ...req.body, owner: req.user._id };
+  const result = await Contact.create(newContact);
   res.status(201).json({
     status: "success",
     code: 201,
