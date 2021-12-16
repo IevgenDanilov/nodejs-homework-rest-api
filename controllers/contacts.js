@@ -1,5 +1,4 @@
 const { NotFound, BadRequest } = require("http-errors");
-// const createError = require("http-errors");
 const { Contact, User } = require("../models");
 const { ContactUpdStatus } = require("../models");
 
@@ -14,14 +13,7 @@ const listContacts = async (req, res, next) => {
       skip,
       limit: +limit,
     }
-  ).populate(
-    "owner",
-    "name"
-    // "email",
-    // "phone",
-    // "favorite"
-  );
-  // const result = await Contact.find({}, "name email phone favorite");
+  ).populate("owner", "name");
   res.json({
     status: "success",
     code: 200,
