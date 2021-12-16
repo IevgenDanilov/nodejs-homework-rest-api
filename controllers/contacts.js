@@ -4,8 +4,17 @@ const { Contact, User } = require("../models");
 const { ContactUpdStatus } = require("../models");
 
 const listContacts = async (req, res, next) => {
+  const { page = 1, limit = 10 } = req.query;
+  const skip = (page - 1) * limit;
   const { _id } = req.user;
-  const result = await Contact.find({ owner: _id }).populate(
+  const result = await Contact.find(
+    { owner: _id },
+    "_id name email phone favorite content owner",
+    {
+      skip,
+      limit: +limit,
+    }
+  ).populate(
     "owner",
     "name"
     // "email",

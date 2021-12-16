@@ -16,4 +16,7 @@ router.post("/login", validation(joiSchema), ctrlWrapper(ctrl.login));
 router.get("/logout", authenticate, ctrlWrapper(ctrl.logout));
 // router.get("/signout", ctrl.signout);
 
+router.get("/current", authenticate, ctrlWrapper(ctrl.getCurrent));
+// router.get("/signout", ctrl.getCurrent);
+
 module.exports = router;
